@@ -25,11 +25,13 @@ def create_app(config_class=Config):
     from app.test import test_bp
     from app.tickets import tickets_bp
     from app.stuffs import  stuffs_bp
+    from app.carousel import carousels_bp
 
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(users_bp, url_prefix='/users')
     app.register_blueprint(test_bp, url_prefix='/test')
     app.register_blueprint(tickets_bp, url_prefix='/tickets')
     app.register_blueprint(stuffs_bp, url_prefix='/stuffs')
+    app.register_blueprint(carousels_bp, url_prefix='/carousels')
 
     return app

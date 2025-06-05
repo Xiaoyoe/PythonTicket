@@ -18,5 +18,6 @@ class Stuff(db.Model):
 
     def get_image_url(self):
         if self.image_res_id:
-            return f'http://127.0.0.1:5000/static/images/{self.image_res_id}'
+            # 修改为图片流接口的 URL
+            return f'http://127.0.0.1:5000/stuffs/images/{self.image_res_id}'
         return None

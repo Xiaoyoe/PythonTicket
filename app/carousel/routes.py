@@ -1,11 +1,11 @@
 from flask import Blueprint, jsonify, request, Response
 from werkzeug.exceptions import BadRequest
-from app.stuffs.models import Stuff
-from app.stuffs.schemas import stuff_schema, stuffs_schema
+from app.carousel.models import Carousel
+from app.carousel.schemas import carousel_schema
 import os
 
-# 创建 stuffs 蓝图
-stuffs_bp = Blueprint('stuffs', __name__)
+# 创建 carousels 蓝图
+carousels_bp = Blueprint('carousels', __name__)
 
 # 图片存储目录（根据实际情况修改）
 IMAGE_DIR = 'static/images'
@@ -21,47 +21,47 @@ def find_image_file(image_res_id):
     return None
 
 
-@stuffs_bp.route('/', methods=['GET'])
-def get_stuffs():
-    """获取所有商品信息，包含完整的图片URL"""
-    stuffs = Stuff.query.all()
+@carousels_bp.route('/', methods=['GET'])
+def get_carousels():
+    """获取所有轮播图信息，包含完整的图片URL"""
+    carousels = Carousel.query.all()
     result = []
 
-    for stuff in stuffs:
-        # 获取商品的基本信息
-        stuff_data = stuff_schema.dump(stuff)
+    for carousel in carousels:
+        # 获取轮播图的基本信息
+        carousel_data = carousel_schema.dump(carousel)
 
         # 查找对应的图片文件
-        image_filename = find_image_file(stuff.image_res_id)
+        image_filename = find_image_file(carousel.image_res_id)
 
         if image_filename:
             # 构建完整的图片URL，包含文件名和后缀
-            stuff_data['image_url'] = f"http://127.0.0.1:5000/stuffs/images/{image_filename}"
+            carousel_data['image_url'] = f"http://127.0.0.1:5000/carousels/images/{image_filename}"
 
-        result.append(stuff_data)
+        result.append(carousel_data)
 
     return jsonify(result), 200
 
 
-@stuffs_bp.route('/<int:stuff_id>', methods=['GET'])
-def get_stuff(stuff_id):
-    """根据ID获取单个商品信息"""
-    stuff = Stuff.query.get_or_404(stuff_id)
+@carousels_bp.route('/<int:carousel_id>', methods=['GET'])
+def get_carousel(carousel_id):
+    """根据ID获取单个轮播图信息"""
+    carousel = Carousel.query.get_or_404(carousel_id)
 
     # 查找对应的图片文件
-    image_filename = find_image_file(stuff.image_res_id)
+    image_filename = find_image_file(carousel.image_res_id)
 
     if image_filename:
         # 构建完整的图片URL，包含文件名和后缀
-        stuff_data = stuff_schema.dump(stuff)
-        stuff_data['image_url'] = f"http://127.0.0.1:5000/stuffs/images/{image_filename}"
-        return jsonify(stuff_data), 200
+        carousel_data = carousel_schema.dump(carousel)
+        carousel_data['image_url'] = f"http://127.0.0.1:5000/carousels/images/{image_filename}"
+        return jsonify(carousel_data), 200
 
     # 如果找不到图片，返回原始数据
-    return jsonify(stuff_schema.dump(stuff)), 200
+    return jsonify(carousel_schema.dump(carousel)), 200
 
 
-@stuffs_bp.route('/images/<filename>', methods=['GET'])
+@carousels_bp.route('/images/<filename>', methods=['GET'])
 def get_image_stream(filename):
     try:
         # 构建完整的图片路径

@@ -15,3 +15,22 @@ class Ticket(db.Model):
     content1 = db.Column(db.Text)
     content2 = db.Column(db.Text)
     price = db.Column(db.Float, nullable=False)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'type': self.type,
+            'title': self.title,
+            'image_res_id': self.image_res_id,
+            'score': self.score,
+            'content1': self.content1,
+            'content2': self.content2,
+            'price': self.price,
+            'image_url': self.get_image_url()
+        }
+
+    def get_image_url(self):
+        if self.image_res_id:
+            # 修改为图片流接口的 URL
+            return f'http://127.0.0.1:5000/tickets/images/{self.image_res_id}'
+        return None
