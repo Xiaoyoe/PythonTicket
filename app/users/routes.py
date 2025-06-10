@@ -8,7 +8,7 @@ from .schemas import user_profile_schema
 users_bp = Blueprint('users', __name__)
 
 
-# 获取当前用户的个人资料
+# 获取当前用户的个人资料   http://localhost:5000/users/profile?user_id=<用户ID>
 @users_bp.route('/profile', methods=['GET'])
 def get_user_profile():
     user_id = request.args.get('user_id')

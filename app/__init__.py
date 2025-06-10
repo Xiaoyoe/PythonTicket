@@ -26,6 +26,7 @@ def create_app(config_class=Config):
     from app.tickets import tickets_bp
     from app.stuffs import  stuffs_bp
     from app.carousel import carousels_bp
+    from app.ai_chat import ai_chat_bp
 
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(users_bp, url_prefix='/users')
@@ -33,5 +34,6 @@ def create_app(config_class=Config):
     app.register_blueprint(tickets_bp, url_prefix='/tickets')
     app.register_blueprint(stuffs_bp, url_prefix='/stuffs')
     app.register_blueprint(carousels_bp, url_prefix='/carousels')
+    app.register_blueprint(ai_chat_bp, url_prefix='/ai_chat')
 
     return app

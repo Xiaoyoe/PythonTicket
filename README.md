@@ -1,4 +1,51 @@
-# 数据库结构与数据概览
+# 🎫 PythonTicket 票务管理系统
+
+## 📖 项目介绍
+PythonTicket 是一个基于Flask框架开发的票务管理系统，提供完整的票务管理解决方案。
+
+## 🚀 功能特性
+- ✅ 多类型票务管理（演唱会/电影/音乐节/脱口秀）
+- ✅ 用户认证系统（注册/登录/个人信息）
+- ✅ 商品积分兑换系统
+- ✅ 轮播图广告展示
+- ✅ 响应式前端设计
+
+## 🛠️ 技术栈
+| 技术 | 用途 |
+|------|------|
+| Flask | 后端框架 |
+| SQLAlchemy | ORM工具 |
+| MySQL | 数据库 |
+| PyMySQL | MySQL驱动 |
+| Flask-WTF | 表单验证 |
+
+## 📦 安装指南
+
+### 环境要求
+- Python 3.13+
+- MySQL 5.7+
+
+### 安装步骤
+```bash
+# 克隆仓库
+git clone https://github.com/yourname/PythonTicket.git
+
+# 进入项目目录
+cd PythonTicket
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 配置数据库
+mysql -u root -p < database.sql
+
+# 启动应用
+python run.py
+```
+
+
+
+## 📚 数据库设计 数据库结构 与 数据概览
 ## 一、数据库基本信息
 - **数据库名称**：db_ticket
 - **服务器类型**：MySQL
@@ -121,7 +168,7 @@
  Target Server Version : 50720 (5.7.20-log)
  File Encoding         : 65001
 
- Date: 05/06/2025 11:08:04
+ Date: 10/06/2025 10:29:24
 */
 
 SET NAMES utf8mb4;
@@ -232,13 +279,13 @@ CREATE TABLE `user`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE,
   UNIQUE INDEX `email`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (6, 'testuser', 'test@example.com', 'testpassword', NULL, NULL, 0);
 INSERT INTO `user` VALUES (20, 'xiaoyoe', 'xiaoyoe@qq.com', '123456', NULL, NULL, 0);
+INSERT INTO `user` VALUES (21, 'xiaoma', 'xiaoma@qq.com', '123456', NULL, NULL, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;
-

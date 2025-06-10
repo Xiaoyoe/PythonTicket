@@ -15,6 +15,8 @@ class Config:
     # 是否开启调试模式（默认关闭，用于生产环境）
     DEBUG = False
 
+    # AI API Key
+    OPENAI_API_KEY = os.environ.get('DASHSCOPE_API_KEY')
 
 # 开发环境配置
 class DevelopmentConfig(Config):
